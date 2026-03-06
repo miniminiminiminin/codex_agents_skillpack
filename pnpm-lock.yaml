@@ -112,7 +112,14 @@ importers:
 
   packages/generation-registry: {}
 
-  packages/generation-runtime: {}
+  packages/generation-runtime:
+    dependencies:
+      '@langue/generation-contracts':
+        specifier: workspace:*
+        version: link:../generation-contracts
+      '@langue/prompt-core':
+        specifier: workspace:*
+        version: link:../prompt-core
 
   packages/generation-testing:
     dependencies:
