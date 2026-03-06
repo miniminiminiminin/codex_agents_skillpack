@@ -1,29 +1,36 @@
+import type { CourseSpec } from "@langue/content-models";
 import type { CourseBriefInput } from "@langue/schemas";
 
 export type GenerateCourseJobTaskId = "course-spec";
-export type GenerateCourseJobStrategyId = "fake" | "codex-cli";
 export type GenerateCourseJobVersion = "v1";
 
 export type GenerateCourseJobPayloadV1 = {
   version: GenerateCourseJobVersion;
-  taskId: GenerateCourseJobTaskId;
-  strategy: GenerateCourseJobStrategyId;
+  jobId: string;
   requestedAt: string;
+  task: GenerateCourseJobTaskId;
   input: CourseBriefInput;
+  execution: {
+    strategyId: string;
+  };
 };
 
 export type GenerateCourseJobSuccessV1 = {
   version: GenerateCourseJobVersion;
-  taskId: GenerateCourseJobTaskId;
+  jobId: string;
+  task: GenerateCourseJobTaskId;
   status: "succeeded";
   startedAt: string;
   completedAt: string;
-  output: Record<string, unknown>;
+  output: CourseSpec;
+  rawText?: string;
+  provider?: string;
 };
 
 export type GenerateCourseJobFailureV1 = {
   version: GenerateCourseJobVersion;
-  taskId: GenerateCourseJobTaskId;
+  jobId: string;
+  task: GenerateCourseJobTaskId;
   status: "failed";
   startedAt: string;
   completedAt: string;
