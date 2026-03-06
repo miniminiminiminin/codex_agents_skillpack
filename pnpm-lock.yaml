@@ -90,13 +90,46 @@ importers:
 
   packages/content: {}
 
+  packages/content-models: {}
+
   packages/db: {}
+
+  packages/generation-contracts: {}
+
+  packages/generation-registry: {}
+
+  packages/generation-runtime: {}
+
+  packages/generation-testing:
+    dependencies:
+      '@langue/content-models':
+        specifier: workspace:*
+        version: link:../content-models
+      '@langue/generation-contracts':
+        specifier: workspace:*
+        version: link:../generation-contracts
+      '@langue/generation-registry':
+        specifier: workspace:*
+        version: link:../generation-registry
+      '@langue/generation-runtime':
+        specifier: workspace:*
+        version: link:../generation-runtime
+      '@langue/prompt-catalog':
+        specifier: workspace:*
+        version: link:../prompt-catalog
+      '@langue/prompt-core':
+        specifier: workspace:*
+        version: link:../prompt-core
 
   packages/jobs: {}
 
   packages/learning: {}
 
   packages/observability: {}
+
+  packages/prompt-catalog: {}
+
+  packages/prompt-core: {}
 
   packages/schemas:
     dependencies:
