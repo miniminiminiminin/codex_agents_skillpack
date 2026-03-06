@@ -148,7 +148,14 @@ importers:
 
   packages/observability: {}
 
-  packages/prompt-catalog: {}
+  packages/prompt-catalog:
+    dependencies:
+      '@langue/prompt-core':
+        specifier: workspace:*
+        version: link:../prompt-core
+      '@langue/schemas':
+        specifier: workspace:*
+        version: link:../schemas
 
   packages/prompt-core: {}
 
