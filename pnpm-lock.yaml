@@ -101,15 +101,24 @@ importers:
       '@langue/ai':
         specifier: workspace:*
         version: link:../ai
+      '@langue/content-models':
+        specifier: workspace:*
+        version: link:../content-models
       '@langue/generation-contracts':
         specifier: workspace:*
         version: link:../generation-contracts
       '@langue/generation-registry':
         specifier: workspace:*
         version: link:../generation-registry
+      '@langue/jobs':
+        specifier: workspace:*
+        version: link:../jobs
       '@langue/prompt-catalog':
         specifier: workspace:*
         version: link:../prompt-catalog
+      '@langue/schemas':
+        specifier: workspace:*
+        version: link:../schemas
 
   packages/db: {}
 

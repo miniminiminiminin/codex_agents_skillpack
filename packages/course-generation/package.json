@@ -12,8 +12,11 @@
   },
   "dependencies": {
     "@langue/ai": "workspace:*",
+    "@langue/content-models": "workspace:*",
     "@langue/generation-contracts": "workspace:*",
     "@langue/generation-registry": "workspace:*",
-    "@langue/prompt-catalog": "workspace:*"
+    "@langue/jobs": "workspace:*",
+    "@langue/prompt-catalog": "workspace:*",
+    "@langue/schemas": "workspace:*"
   }
 }

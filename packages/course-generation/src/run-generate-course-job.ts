@@ -39,6 +39,7 @@ export async function runGenerateCourseJob(
       completedAt: now(),
       output: result.output,
       rawText: result.rawText,
+      provider: payload.execution.strategyId,
     };
   } catch (error) {
     return {

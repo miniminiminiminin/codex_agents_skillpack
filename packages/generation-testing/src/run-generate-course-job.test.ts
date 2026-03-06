@@ -64,8 +64,13 @@ describe("runGenerateCourseJob", () => {
 
     expect(result.status).toBe("succeeded");
     if (result.status === "succeeded") {
+      expect(result.jobId).toBe(basePayload.jobId);
+      expect(result.task).toBe(basePayload.task);
+      expect(result.startedAt).toBe("2026-03-07T00:00:05.000Z");
+      expect(result.completedAt).toBe("2026-03-07T00:00:05.000Z");
       expect(result.output.title).toBe("French Travel Foundations");
       expect(result.rawText).toBe(JSON.stringify(validCourseSpec));
+      expect(result.provider).toBe("fake");
     }
   });
 
@@ -92,6 +97,11 @@ describe("runGenerateCourseJob", () => {
     );
 
     expect(result.status).toBe("succeeded");
+    if (result.status === "succeeded") {
+      expect(result.jobId).toBe(basePayload.jobId);
+      expect(result.task).toBe(basePayload.task);
+      expect(result.provider).toBe("codex-cli");
+    }
     expect(fakeCli.calls).toHaveLength(1);
   });
 
@@ -110,6 +120,10 @@ describe("runGenerateCourseJob", () => {
 
     expect(result.status).toBe("failed");
     if (result.status === "failed") {
+      expect(result.jobId).toBe(basePayload.jobId);
+      expect(result.task).toBe(basePayload.task);
+      expect(result.startedAt).toBe("2026-03-07T00:00:05.000Z");
+      expect(result.completedAt).toBe("2026-03-07T00:00:05.000Z");
       expect(result.error.message).toMatch(/requires a cwd/);
     }
   });
@@ -125,6 +139,8 @@ describe("runGenerateCourseJob", () => {
     expect(result.status).toBe("failed");
     if (result.status === "failed") {
       expect(result.error.message).toMatch(/Invalid structured output/);
+      expect(result.jobId).toBe(basePayload.jobId);
+      expect(result.task).toBe(basePayload.task);
     }
   });
 
@@ -141,6 +157,8 @@ describe("runGenerateCourseJob", () => {
 
     expect(result.status).toBe("failed");
     if (result.status === "failed") {
+      expect(result.jobId).toBe(basePayload.jobId);
+      expect(result.task).toBe(basePayload.task);
       expect(result.error.message).toMatch(/Synthetic adapter crash/);
     }
   });
