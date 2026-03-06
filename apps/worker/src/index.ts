@@ -5,6 +5,27 @@ import { runGenerateSpeechAssetsJob } from "./jobs/generate-speech-assets";
 import { runPublishCourseJob } from "./jobs/publish-course";
 import { runValidateCourseJob } from "./jobs/validate-course";
 
+export async function previewWorkerJobs() {
+  const [
+    generateCourse,
+    validateCourse,
+    publishCourse,
+    generateSpeechAssets
+  ] = await Promise.all([
+    runGenerateCourseJob(),
+    runValidateCourseJob(),
+    runPublishCourseJob(),
+    runGenerateSpeechAssetsJob()
+  ]);
+
+  return {
+    generateCourse,
+    validateCourse,
+    publishCourse,
+    generateSpeechAssets
+  };
+}
+
 async function main() {
   const runtime = createWorkerRuntime();
 
@@ -12,14 +33,7 @@ async function main() {
     queues: generationQueueNames
   });
 
-  const results = await Promise.all([
-    runGenerateCourseJob(),
-    runValidateCourseJob(),
-    runPublishCourseJob(),
-    runGenerateSpeechAssetsJob()
-  ]);
-
-  runtime.logger.info("job previews ready", { results });
+  runtime.logger.info("job previews ready", await previewWorkerJobs());
 }
 
 void main();
