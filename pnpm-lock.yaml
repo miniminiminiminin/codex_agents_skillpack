@@ -96,6 +96,21 @@ importers:
         specifier: ^3.24.2
         version: 3.25.76
 
+  packages/course-generation:
+    dependencies:
+      '@langue/ai':
+        specifier: workspace:*
+        version: link:../ai
+      '@langue/generation-contracts':
+        specifier: workspace:*
+        version: link:../generation-contracts
+      '@langue/generation-registry':
+        specifier: workspace:*
+        version: link:../generation-registry
+      '@langue/prompt-catalog':
+        specifier: workspace:*
+        version: link:../prompt-catalog
+
   packages/db: {}
 
   packages/generation-contracts:
@@ -142,6 +157,9 @@ importers:
       '@langue/content-models':
         specifier: workspace:*
         version: link:../content-models
+      '@langue/course-generation':
+        specifier: workspace:*
+        version: link:../course-generation
       '@langue/generation-contracts':
         specifier: workspace:*
         version: link:../generation-contracts

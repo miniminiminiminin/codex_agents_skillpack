@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@langue/ai": "workspace:*",
+    "@langue/course-generation": "workspace:*",
     "@langue/content-models": "workspace:*",
     "@langue/generation-contracts": "workspace:*",
     "@langue/generation-registry": "workspace:*",

@@ -2,11 +2,9 @@ import { mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { describe, expect, it } from "vitest";
+import { runRegisteredTask } from "@langue/generation-registry";
 import { defaultCourseBrief } from "@langue/schemas";
-import {
-  buildCourseGenerationRegistry,
-  runRegisteredTask,
-} from "../../course-generation/src/index";
+import { buildCourseGenerationRegistry } from "@langue/course-generation";
 import { createFakeCodexCli } from "./fake-codex-cli";
 import { createFakeModelAdapterFactory } from "./fake-model-adapter-factory";
 
