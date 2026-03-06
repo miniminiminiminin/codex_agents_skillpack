@@ -65,6 +65,9 @@ importers:
       '@langue/ai':
         specifier: workspace:*
         version: link:../../packages/ai
+      '@langue/course-generation':
+        specifier: workspace:*
+        version: link:../../packages/course-generation
       '@langue/jobs':
         specifier: workspace:*
         version: link:../../packages/jobs

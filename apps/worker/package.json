@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@langue/ai": "workspace:*",
+    "@langue/course-generation": "workspace:*",
     "@langue/jobs": "workspace:*",
     "@langue/observability": "workspace:*",
     "@langue/schemas": "workspace:*",
