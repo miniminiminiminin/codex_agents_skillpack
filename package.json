@@ -1,0 +1,21 @@
+{
+  "name": "langue-monorepo",
+  "private": true,
+  "packageManager": "pnpm@10.6.5",
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:web": "pnpm --filter @langue/web dev",
+    "dev:worker": "pnpm --filter @langue/worker dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.10",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "eslint": "^9.22.0",
+    "turbo": "^2.4.4",
+    "typescript": "^5.8.2"
+  }
+}
