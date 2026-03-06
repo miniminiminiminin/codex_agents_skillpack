@@ -123,6 +123,9 @@ importers:
 
   packages/generation-testing:
     dependencies:
+      '@langue/ai':
+        specifier: workspace:*
+        version: link:../ai
       '@langue/content-models':
         specifier: workspace:*
         version: link:../content-models

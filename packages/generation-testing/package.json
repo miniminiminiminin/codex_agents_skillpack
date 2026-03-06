@@ -12,6 +12,7 @@
     "test": "vitest run"
   },
   "dependencies": {
+    "@langue/ai": "workspace:*",
     "@langue/content-models": "workspace:*",
     "@langue/generation-contracts": "workspace:*",
     "@langue/generation-registry": "workspace:*",
