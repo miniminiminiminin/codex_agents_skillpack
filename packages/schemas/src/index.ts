@@ -11,6 +11,9 @@ export const courseBriefSchema = z.object({
 });
 
 export type CourseBrief = z.infer<typeof courseBriefSchema>;
+export type CourseBriefInput = CourseBrief;
+
+export const courseBriefInputSchema = courseBriefSchema;
 
 export const defaultCourseBrief: CourseBrief = {
   sourceLanguage: "Korean",
