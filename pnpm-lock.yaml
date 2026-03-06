@@ -110,7 +110,20 @@ importers:
         specifier: ^3.24.2
         version: 3.25.76
 
-  packages/generation-registry: {}
+  packages/generation-registry:
+    dependencies:
+      '@langue/ai':
+        specifier: workspace:*
+        version: link:../ai
+      '@langue/generation-contracts':
+        specifier: workspace:*
+        version: link:../generation-contracts
+      '@langue/generation-runtime':
+        specifier: workspace:*
+        version: link:../generation-runtime
+      '@langue/prompt-catalog':
+        specifier: workspace:*
+        version: link:../prompt-catalog
 
   packages/generation-runtime:
     dependencies:

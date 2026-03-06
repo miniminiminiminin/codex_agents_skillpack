@@ -9,5 +9,11 @@
     "build": "tsc -p tsconfig.json",
     "lint": "tsc --noEmit -p tsconfig.json",
     "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@langue/ai": "workspace:*",
+    "@langue/generation-contracts": "workspace:*",
+    "@langue/generation-runtime": "workspace:*",
+    "@langue/prompt-catalog": "workspace:*"
   }
 }
