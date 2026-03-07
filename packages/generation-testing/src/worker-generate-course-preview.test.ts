@@ -1,8 +1,9 @@
 import { describe, expect, it } from "vitest";
 import {
+  consumeGenerateCourseJobMessage,
   createGenerateCoursePreviewPayload,
   runGenerateCourseJob
-} from "../../../apps/worker/src/jobs/generate-course/index";
+} from "@langue/worker";
 import { createFakeModelAdapterFactory } from "./fake-model-adapter-factory";
 
 const validCourseSpec = {
@@ -38,6 +39,72 @@ const validCourseSpec = {
 };
 
 describe("worker generate-course preview", () => {
+  it("consumes an explicit serializable queue payload", async () => {
+    const result = await consumeGenerateCourseJobMessage(
+      {
+        version: "v1",
+        jobId: "queue-job-001",
+        requestedAt: "2026-03-07T00:00:00.000Z",
+        task: "course-spec",
+        input: {
+          sourceLanguage: "Korean",
+          targetLanguage: "Spanish",
+          targetLevel: "A1",
+          courseGoal: "Daily survival conversations",
+          tone: "Direct and supportive",
+          lessonVolume: "24 lessons",
+        },
+        execution: {
+          strategyId: "fake",
+        },
+      },
+      {
+        fakeStrategyFactory: createFakeModelAdapterFactory({
+          rawText: JSON.stringify({
+            ...validCourseSpec,
+            courseId: "course-spanish-survival-a1",
+            title: "Spanish Survival Foundations",
+            targetLanguage: "Spanish",
+            targetLevel: "A1",
+            courseGoal: "Daily survival conversations",
+            tone: "Direct and supportive",
+            lessonVolume: "24 lessons",
+          }),
+        }),
+        now: () => "2026-03-07T00:00:05.000Z",
+      },
+    );
+
+    expect(result.status).toBe("succeeded");
+    if (result.status === "succeeded") {
+      expect(result.jobId).toBe("queue-job-001");
+      expect(result.output.targetLanguage).toBe("Spanish");
+      expect(result.output.title).toBe("Spanish Survival Foundations");
+    }
+  });
+
+  it("rejects malformed queue payloads before execution", async () => {
+    await expect(() =>
+      consumeGenerateCourseJobMessage(
+        {
+          version: "v1",
+          jobId: "bad-job-001",
+          requestedAt: 123,
+          task: "course-spec",
+          input: validCourseSpec,
+          execution: {
+            strategyId: "fake",
+          },
+        },
+        {
+          fakeStrategyFactory: createFakeModelAdapterFactory({
+            rawText: JSON.stringify(validCourseSpec),
+          }),
+        },
+      ),
+    ).rejects.toThrow(/Invalid generate-course job payload/);
+  });
+
   it("builds a preview payload for the course-spec task", () => {
     const payload = createGenerateCoursePreviewPayload({
       requestedAt: "2026-03-07T00:00:00.000Z",

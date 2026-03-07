@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import { defaultCourseBrief } from "@langue/schemas";
 import {
   generationQueueNames,
+  parseGenerateCourseJobPayload,
   type GenerateCourseJobPayloadV1,
   type GenerateCourseJobResultV1,
 } from "@langue/jobs";
@@ -50,6 +51,67 @@ describe("generate-course job contracts", () => {
     expect(payload.version).toBe("v1");
     expect(payload.task).toBe("course-spec");
     expect(payload.input.courseGoal).toBe(defaultCourseBrief.courseGoal);
+  });
+
+  it("parses a serializable request payload at runtime", () => {
+    const parsed = parseGenerateCourseJobPayload({
+      version: "v1",
+      jobId: "job-001",
+      requestedAt: "2026-03-07T00:00:00.000Z",
+      task: "course-spec",
+      input: defaultCourseBrief,
+      execution: {
+        strategyId: "fake",
+      },
+    });
+
+    expect(parsed.jobId).toBe("job-001");
+    expect(parsed.input.targetLanguage).toBe(defaultCourseBrief.targetLanguage);
+  });
+
+  it("rejects malformed serializable request payloads", () => {
+    expect(() =>
+      parseGenerateCourseJobPayload({
+        version: "v1",
+        jobId: "job-001",
+        requestedAt: 123,
+        task: "course-spec",
+        input: defaultCourseBrief,
+        execution: {
+          strategyId: "fake",
+        },
+      }),
+    ).toThrow(/Invalid generate-course job payload/);
+  });
+
+  it("rejects unknown execution strategies at the queue boundary", () => {
+    expect(() =>
+      parseGenerateCourseJobPayload({
+        version: "v1",
+        jobId: "job-001",
+        requestedAt: "2026-03-07T00:00:00.000Z",
+        task: "course-spec",
+        input: defaultCourseBrief,
+        execution: {
+          strategyId: "mystery-provider",
+        },
+      }),
+    ).toThrow(/Invalid generate-course job payload/);
+  });
+
+  it("rejects non-ISO timestamps at the queue boundary", () => {
+    expect(() =>
+      parseGenerateCourseJobPayload({
+        version: "v1",
+        jobId: "job-001",
+        requestedAt: "tomorrow",
+        task: "course-spec",
+        input: defaultCourseBrief,
+        execution: {
+          strategyId: "fake",
+        },
+      }),
+    ).toThrow(/Invalid generate-course job payload/);
   });
 
   it("holds succeeded and failed result envelopes", () => {

@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@langue/content-models": "workspace:*",
-    "@langue/schemas": "workspace:*"
+    "@langue/schemas": "workspace:*",
+    "zod": "^3.24.2"
   }
 }

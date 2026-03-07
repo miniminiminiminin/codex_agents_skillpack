@@ -19,6 +19,7 @@
     "@langue/generation-registry": "workspace:*",
     "@langue/generation-runtime": "workspace:*",
     "@langue/jobs": "workspace:*",
+    "@langue/worker": "workspace:*",
     "@langue/schemas": "workspace:*",
     "@langue/prompt-catalog": "workspace:*",
     "@langue/prompt-core": "workspace:*"

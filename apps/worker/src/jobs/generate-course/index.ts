@@ -2,17 +2,22 @@ import {
   runGenerateCourseJob as runGenerateCourseApplicationJob,
   type RunGenerateCourseJobOptions,
 } from "@langue/course-generation";
+import {
+  type GenerateCourseJobExecutionStrategyId,
+  parseGenerateCourseJobPayload,
+  type GenerateCourseJobPayloadV1,
+} from "@langue/jobs";
 import { defaultCourseBrief } from "@langue/schemas";
 
 export type RunGenerateCoursePreviewOptions = RunGenerateCourseJobOptions & {
   jobId?: string;
   requestedAt?: string;
-  strategyId?: string;
+  strategyId?: GenerateCourseJobExecutionStrategyId;
 };
 
 export function createGenerateCoursePreviewPayload(
   options: RunGenerateCoursePreviewOptions = {},
-) {
+): GenerateCourseJobPayloadV1 {
   const strategyId =
     options.strategyId ?? (options.fakeStrategyFactory ? "fake" : "codex-cli");
   const requestedAt =
@@ -30,10 +35,20 @@ export function createGenerateCoursePreviewPayload(
   };
 }
 
+export async function consumeGenerateCourseJobMessage(
+  message: unknown,
+  options: RunGenerateCourseJobOptions = {},
+) {
+  return runGenerateCourseApplicationJob(
+    parseGenerateCourseJobPayload(message),
+    options,
+  );
+}
+
 export async function runGenerateCourseJob(
   options: RunGenerateCoursePreviewOptions = {},
 ) {
-  return runGenerateCourseApplicationJob(
+  return consumeGenerateCourseJobMessage(
     createGenerateCoursePreviewPayload(options),
     options,
   );
