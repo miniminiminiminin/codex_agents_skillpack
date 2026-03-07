@@ -1,0 +1,22 @@
+{
+  "name": "@langue/course-generation",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@langue/ai": "workspace:*",
+    "@langue/content-models": "workspace:*",
+    "@langue/generation-contracts": "workspace:*",
+    "@langue/generation-registry": "workspace:*",
+    "@langue/jobs": "workspace:*",
+    "@langue/prompt-catalog": "workspace:*",
+    "@langue/schemas": "workspace:*"
+  }
+}

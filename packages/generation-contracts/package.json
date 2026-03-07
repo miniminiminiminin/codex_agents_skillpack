@@ -1,0 +1,18 @@
+{
+  "name": "@langue/generation-contracts",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "lint": "tsc --noEmit -p tsconfig.json",
+    "typecheck": "tsc --noEmit -p tsconfig.json"
+  },
+  "dependencies": {
+    "@langue/content-models": "workspace:*",
+    "@langue/schemas": "workspace:*",
+    "zod": "^3.24.2"
+  }
+}

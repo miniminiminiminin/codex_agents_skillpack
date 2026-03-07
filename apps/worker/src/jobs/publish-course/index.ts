@@ -1,6 +1,6 @@
 export async function runPublishCourseJob() {
   return {
-    job: "publish-course",
-    status: "ready"
+    job: "publish-course" as const,
+    status: "ready" as const,
   };
 }

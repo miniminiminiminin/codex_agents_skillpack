@@ -1,6 +1,9 @@
 {
   "name": "@langue/worker",
   "private": true,
+  "type": "module",
+  "main": "src/public-api.ts",
+  "types": "src/public-api.ts",
   "scripts": {
     "dev": "tsx watch src/index.ts",
     "build": "tsc -p tsconfig.json",
@@ -9,6 +12,7 @@
   },
   "dependencies": {
     "@langue/ai": "workspace:*",
+    "@langue/course-generation": "workspace:*",
     "@langue/jobs": "workspace:*",
     "@langue/observability": "workspace:*",
     "@langue/schemas": "workspace:*",
