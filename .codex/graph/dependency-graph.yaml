@@ -1,0 +1,987 @@
+version: 1
+
+nodes:
+  - id: codex-root-agents
+    type: agents
+    path: .codex/AGENTS.md
+    authority_level: 100
+    local_only: false
+    owns:
+      - shared-execution-contract
+      - shared-asset-policy
+      - graph-first-governance
+    depends_on: []
+    change_requires_review_from:
+      - cto-prompt
+
+  - id: codex-root-readme
+    type: readme
+    path: .codex/README.md
+    authority_level: 90
+    local_only: false
+    owns:
+      - operating-system-overview
+      - chain-of-command
+    depends_on:
+      - codex-root-agents
+      - graph-readme
+
+  - id: graph-agents
+    type: agents
+    path: .codex/graph/AGENTS.md
+    authority_level: 95
+    local_only: false
+    owns:
+      - graph-directory-rules
+    depends_on:
+      - codex-root-agents
+      - codex-root-readme
+
+  - id: graph-readme
+    type: graph-rule
+    path: .codex/graph/README.md
+    authority_level: 85
+    local_only: false
+    owns:
+      - graph-usage
+      - graph-source-of-truth
+    depends_on:
+      - codex-root-agents
+
+  - id: graph-scripts-agents
+    type: agents
+    path: .codex/graph/scripts/AGENTS.md
+    authority_level: 83
+    local_only: false
+    owns:
+      - graph-script-directory-rules
+    depends_on:
+      - graph-agents
+      - dependency-graph
+
+  - id: graph-scripts-readme
+    type: readme
+    path: .codex/graph/scripts/README.md
+    authority_level: 78
+    local_only: false
+    owns:
+      - graph-script-usage
+    depends_on:
+      - graph-scripts-agents
+      - dependency-graph
+
+  - id: dependency-graph
+    type: graph-rule
+    path: .codex/graph/dependency-graph.yaml
+    authority_level: 95
+    local_only: false
+    owns:
+      - node-registry
+      - edge-registry
+      - change-impact-map
+    depends_on:
+      - graph-agents
+      - graph-readme
+
+  - id: graph-node-types
+    type: graph-rule
+    path: .codex/graph/node-types.md
+    authority_level: 80
+    local_only: false
+    owns:
+      - node-schema-reference
+    depends_on:
+      - dependency-graph
+
+  - id: graph-change-impact-rules
+    type: graph-rule
+    path: .codex/graph/change-impact-rules.md
+    authority_level: 85
+    local_only: false
+    owns:
+      - graph-edit-rules
+    depends_on:
+      - dependency-graph
+
+  - id: graph-operating-allocation
+    type: graph-rule
+    path: .codex/graph/operating-allocation.md
+    authority_level: 82
+    local_only: false
+    owns:
+      - asset-allocation-model
+    depends_on:
+      - dependency-graph
+
+  - id: graph-toolchain-policy
+    type: graph-rule
+    path: .codex/graph/toolchain-policy.md
+    authority_level: 78
+    local_only: false
+    owns:
+      - toolchain-policy
+    depends_on:
+      - dependency-graph
+
+  - id: graph-org-design-principles
+    type: graph-rule
+    path: .codex/graph/org-design-principles.md
+    authority_level: 80
+    local_only: false
+    owns:
+      - org-design-model
+    depends_on:
+      - dependency-graph
+
+  - id: trace-impact-script
+    type: script
+    path: .codex/graph/scripts/trace-impact.mjs
+    authority_level: 88
+    local_only: false
+    owns:
+      - graph-preflight
+      - graph-postflight
+    depends_on:
+      - dependency-graph
+      - graph-scripts-agents
+
+  - id: prompts-agents
+    type: agents
+    path: .codex/prompts/AGENTS.md
+    authority_level: 80
+    local_only: false
+    owns:
+      - prompt-directory-ownership
+    depends_on:
+      - codex-root-agents
+      - dependency-graph
+
+  - id: prompts-readme
+    type: readme
+    path: .codex/prompts/README.md
+    authority_level: 70
+    local_only: false
+    owns:
+      - prompt-system-index
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: cto-prompt
+    type: prompt
+    path: .codex/prompts/cto.md
+    authority_level: 75
+    local_only: false
+    owns:
+      - technical-governance
+      - integration-acceptance
+    depends_on:
+      - codex-root-agents
+      - prompts-agents
+      - dependency-graph
+    change_requires_review_from:
+      - prompts-agents
+
+  - id: po-pm-prompt
+    type: prompt
+    path: .codex/prompts/po-pm.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - acceptance-definition
+      - workstream-scope
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: tech-lead-prompt
+    type: prompt
+    path: .codex/prompts/tech-lead.md
+    authority_level: 70
+    local_only: false
+    owns:
+      - slice-definition
+      - technical-review
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: backend-prompt
+    type: prompt
+    path: .codex/prompts/software-engineer-backend.md
+    authority_level: 60
+    local_only: false
+    owns:
+      - backend-slice-delivery
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: frontend-prompt
+    type: prompt
+    path: .codex/prompts/software-engineer-frontend.md
+    authority_level: 60
+    local_only: false
+    owns:
+      - frontend-slice-delivery
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: designer-prompt
+    type: prompt
+    path: .codex/prompts/ui-ux-designer.md
+    authority_level: 60
+    local_only: false
+    owns:
+      - design-direction
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: qa-prompt
+    type: prompt
+    path: .codex/prompts/qa.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - verification-governance
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: devops-prompt
+    type: prompt
+    path: .codex/prompts/devops.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - runtime-readiness
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: engineering-manager-prompt
+    type: prompt
+    path: .codex/prompts/engineering-manager.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - staffing-governance
+      - execution-health-escalation
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: platform-prompt
+    type: prompt
+    path: .codex/prompts/platform.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - platform-governance
+      - shared-runtime-foundations
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: security-privacy-prompt
+    type: prompt
+    path: .codex/prompts/security-privacy.md
+    authority_level: 68
+    local_only: false
+    owns:
+      - security-review
+      - privacy-review
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: release-manager-prompt
+    type: prompt
+    path: .codex/prompts/release-manager.md
+    authority_level: 68
+    local_only: false
+    owns:
+      - release-approval
+      - go-no-go-routing
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: spec-reviewer-prompt
+    type: prompt
+    path: .codex/prompts/spec-reviewer.md
+    authority_level: 64
+    local_only: false
+    owns:
+      - spec-review
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: code-reviewer-prompt
+    type: prompt
+    path: .codex/prompts/code-reviewer.md
+    authority_level: 64
+    local_only: false
+    owns:
+      - code-quality-review
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: integration-worker-prompt
+    type: prompt
+    path: .codex/prompts/integration-worker.md
+    authority_level: 62
+    local_only: false
+    owns:
+      - integration-execution
+    depends_on:
+      - prompts-agents
+      - dependency-graph
+
+  - id: orchestrator-bridge-prompt
+    type: prompt
+    path: .codex/prompts/orchestrator.md
+    authority_level: 50
+    local_only: false
+    owns:
+      - orchestrator-bridge
+    depends_on:
+      - prompts-agents
+      - cto-prompt
+      - dependency-graph
+
+  - id: worker-bridge-prompt
+    type: prompt
+    path: .codex/prompts/worker.md
+    authority_level: 50
+    local_only: false
+    owns:
+      - worker-bridge
+    depends_on:
+      - prompts-agents
+      - backend-prompt
+      - frontend-prompt
+      - dependency-graph
+
+  - id: workflows-agents
+    type: agents
+    path: .codex/workflows/AGENTS.md
+    authority_level: 80
+    local_only: false
+    owns:
+      - workflow-directory-ownership
+    depends_on:
+      - codex-root-agents
+      - dependency-graph
+
+  - id: workflows-readme
+    type: readme
+    path: .codex/workflows/README.md
+    authority_level: 70
+    local_only: false
+    owns:
+      - workflow-system-index
+    depends_on:
+      - workflows-agents
+      - dependency-graph
+
+  - id: ceo-cto-intake-workflow
+    type: workflow
+    path: .codex/workflows/ceo-cto-intake.md
+    authority_level: 70
+    local_only: false
+    owns:
+      - intake-sequence
+    depends_on:
+      - workflows-agents
+      - cto-prompt
+      - po-pm-prompt
+      - dependency-graph
+
+  - id: top-down-fanout-workflow
+    type: workflow
+    path: .codex/workflows/top-down-fanout.md
+    authority_level: 70
+    local_only: false
+    owns:
+      - dispatch-sequence
+    depends_on:
+      - workflows-agents
+      - cto-prompt
+      - tech-lead-prompt
+      - dependency-graph
+
+  - id: review-gate-workflow
+    type: workflow
+    path: .codex/workflows/review-gate.md
+    authority_level: 70
+    local_only: false
+    owns:
+      - acceptance-gate
+    depends_on:
+      - workflows-agents
+      - qa-prompt
+      - dependency-graph
+
+  - id: bottom-up-integration-workflow
+    type: workflow
+    path: .codex/workflows/bottom-up-integration.md
+    authority_level: 70
+    local_only: false
+    owns:
+      - integration-sequence
+    depends_on:
+      - workflows-agents
+      - cto-prompt
+      - dependency-graph
+
+  - id: release-readiness-workflow
+    type: workflow
+    path: .codex/workflows/release-readiness.md
+    authority_level: 70
+    local_only: false
+    owns:
+      - release-gate
+    depends_on:
+      - workflows-agents
+      - qa-prompt
+      - devops-prompt
+      - dependency-graph
+
+  - id: shared-asset-change-workflow
+    type: workflow
+    path: .codex/workflows/shared-asset-change.md
+    authority_level: 75
+    local_only: false
+    owns:
+      - shared-asset-change-control
+    depends_on:
+      - workflows-agents
+      - dependency-graph
+
+  - id: templates-agents
+    type: agents
+    path: .codex/templates/AGENTS.md
+    authority_level: 80
+    local_only: false
+    owns:
+      - template-directory-ownership
+    depends_on:
+      - codex-root-agents
+      - dependency-graph
+
+  - id: templates-readme
+    type: readme
+    path: .codex/templates/README.md
+    authority_level: 70
+    local_only: false
+    owns:
+      - template-system-index
+    depends_on:
+      - templates-agents
+      - dependency-graph
+
+  - id: module-ownership-template
+    type: template
+    path: .codex/templates/module-ownership.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - ownership-record
+    depends_on:
+      - templates-agents
+      - dependency-graph
+
+  - id: worker-handoff-template
+    type: template
+    path: .codex/templates/worker-handoff.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - handoff-record
+    depends_on:
+      - templates-agents
+      - dependency-graph
+
+  - id: review-checklist-template
+    type: template
+    path: .codex/templates/review-checklist.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - review-record
+    depends_on:
+      - templates-agents
+      - dependency-graph
+
+  - id: integration-checklist-template
+    type: template
+    path: .codex/templates/integration-checklist.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - integration-record
+    depends_on:
+      - templates-agents
+      - dependency-graph
+
+  - id: active-slices-template
+    type: template
+    path: .codex/templates/active-slices.md
+    authority_level: 60
+    local_only: false
+    owns:
+      - slice-queue-structure
+    depends_on:
+      - templates-agents
+      - dependency-graph
+
+  - id: package-scaffold-template
+    type: template
+    path: .codex/templates/package-scaffold.md
+    authority_level: 60
+    local_only: false
+    owns:
+      - package-structure-guidance
+    depends_on:
+      - templates-agents
+      - dependency-graph
+
+  - id: change-impact-record-template
+    type: template
+    path: .codex/templates/change-impact-record.md
+    authority_level: 68
+    local_only: false
+    owns:
+      - change-impact-record
+    depends_on:
+      - templates-agents
+      - dependency-graph
+
+  - id: skills-agents
+    type: agents
+    path: .codex/skills/AGENTS.md
+    authority_level: 80
+    local_only: false
+    owns:
+      - skill-directory-ownership
+    depends_on:
+      - codex-root-agents
+      - dependency-graph
+
+  - id: skills-readme
+    type: readme
+    path: .codex/skills/README.md
+    authority_level: 70
+    local_only: false
+    owns:
+      - skill-system-index
+    depends_on:
+      - skills-agents
+      - dependency-graph
+
+  - id: repo-instruction-audit-skill
+    type: skill
+    path: .codex/skills/repo-instruction-audit/SKILL.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - instruction-audit-execution
+    depends_on:
+      - skills-agents
+      - dependency-graph
+
+  - id: top-down-orchestration-skill
+    type: skill
+    path: .codex/skills/top-down-orchestration/SKILL.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - orchestration-execution
+    depends_on:
+      - skills-agents
+      - dependency-graph
+
+  - id: bottom-up-delivery-skill
+    type: skill
+    path: .codex/skills/bottom-up-module-delivery/SKILL.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - worker-delivery-execution
+    depends_on:
+      - skills-agents
+      - dependency-graph
+
+  - id: module-handoff-skill
+    type: skill
+    path: .codex/skills/module-handoff/SKILL.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - handoff-execution
+    depends_on:
+      - skills-agents
+      - dependency-graph
+
+  - id: parallel-dispatch-skill
+    type: skill
+    path: .codex/skills/parallel-module-dispatch/SKILL.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - parallel-dispatch-execution
+    depends_on:
+      - skills-agents
+      - dependency-graph
+
+  - id: integration-gate-skill
+    type: skill
+    path: .codex/skills/integration-gate/SKILL.md
+    authority_level: 65
+    local_only: false
+    owns:
+      - integration-gate-execution
+    depends_on:
+      - skills-agents
+      - dependency-graph
+
+  - id: graph-governed-editing-skill
+    type: skill
+    path: .codex/skills/graph-governed-editing/SKILL.md
+    authority_level: 72
+    local_only: false
+    owns:
+      - graph-first-edit-discipline
+    depends_on:
+      - skills-agents
+      - dependency-graph
+
+  - id: repo-toolchain-operation-skill
+    type: skill
+    path: .codex/skills/repo-toolchain-operation/SKILL.md
+    authority_level: 66
+    local_only: false
+    owns:
+      - tool-selection-procedure
+    depends_on:
+      - skills-agents
+      - graph-toolchain-policy
+      - dependency-graph
+
+  - id: memory-agents
+    type: agents
+    path: .codex/memory/AGENTS.md
+    authority_level: 20
+    local_only: true
+    owns:
+      - local-memory-boundary
+    depends_on:
+      - codex-root-agents
+      - dependency-graph
+
+  - id: memory-readme
+    type: memory
+    path: .codex/memory/README.md
+    authority_level: 10
+    local_only: true
+    owns:
+      - local-memory-usage
+    depends_on:
+      - memory-agents
+
+edges:
+  - from: codex-root-agents
+    to: codex-root-readme
+    kind: governs
+  - from: codex-root-agents
+    to: graph-agents
+    kind: governs
+  - from: graph-agents
+    to: graph-scripts-agents
+    kind: governs
+  - from: codex-root-agents
+    to: prompts-agents
+    kind: governs
+  - from: codex-root-agents
+    to: workflows-agents
+    kind: governs
+  - from: codex-root-agents
+    to: templates-agents
+    kind: governs
+  - from: codex-root-agents
+    to: skills-agents
+    kind: governs
+  - from: codex-root-agents
+    to: memory-agents
+    kind: governs
+
+  - from: graph-agents
+    to: dependency-graph
+    kind: governs
+  - from: graph-readme
+    to: dependency-graph
+    kind: derived_from
+  - from: graph-scripts-agents
+    to: graph-scripts-readme
+    kind: governs
+  - from: graph-scripts-agents
+    to: trace-impact-script
+    kind: governs
+  - from: graph-node-types
+    to: dependency-graph
+    kind: uses
+  - from: graph-change-impact-rules
+    to: dependency-graph
+    kind: uses
+  - from: graph-operating-allocation
+    to: dependency-graph
+    kind: uses
+  - from: graph-toolchain-policy
+    to: dependency-graph
+    kind: uses
+  - from: graph-org-design-principles
+    to: dependency-graph
+    kind: uses
+  - from: graph-scripts-readme
+    to: trace-impact-script
+    kind: uses
+
+  - from: prompts-agents
+    to: prompts-readme
+    kind: governs
+  - from: prompts-agents
+    to: cto-prompt
+    kind: governs
+  - from: prompts-agents
+    to: po-pm-prompt
+    kind: governs
+  - from: prompts-agents
+    to: tech-lead-prompt
+    kind: governs
+  - from: prompts-agents
+    to: backend-prompt
+    kind: governs
+  - from: prompts-agents
+    to: frontend-prompt
+    kind: governs
+  - from: prompts-agents
+    to: designer-prompt
+    kind: governs
+  - from: prompts-agents
+    to: qa-prompt
+    kind: governs
+  - from: prompts-agents
+    to: devops-prompt
+    kind: governs
+  - from: prompts-agents
+    to: engineering-manager-prompt
+    kind: governs
+  - from: prompts-agents
+    to: platform-prompt
+    kind: governs
+  - from: prompts-agents
+    to: security-privacy-prompt
+    kind: governs
+  - from: prompts-agents
+    to: release-manager-prompt
+    kind: governs
+  - from: prompts-agents
+    to: spec-reviewer-prompt
+    kind: governs
+  - from: prompts-agents
+    to: code-reviewer-prompt
+    kind: governs
+  - from: prompts-agents
+    to: integration-worker-prompt
+    kind: governs
+  - from: prompts-agents
+    to: orchestrator-bridge-prompt
+    kind: governs
+  - from: prompts-agents
+    to: worker-bridge-prompt
+    kind: governs
+
+  - from: workflows-agents
+    to: workflows-readme
+    kind: governs
+  - from: workflows-agents
+    to: ceo-cto-intake-workflow
+    kind: governs
+  - from: workflows-agents
+    to: top-down-fanout-workflow
+    kind: governs
+  - from: workflows-agents
+    to: review-gate-workflow
+    kind: governs
+  - from: workflows-agents
+    to: bottom-up-integration-workflow
+    kind: governs
+  - from: workflows-agents
+    to: release-readiness-workflow
+    kind: governs
+  - from: workflows-agents
+    to: shared-asset-change-workflow
+    kind: governs
+
+  - from: templates-agents
+    to: templates-readme
+    kind: governs
+  - from: templates-agents
+    to: module-ownership-template
+    kind: governs
+  - from: templates-agents
+    to: worker-handoff-template
+    kind: governs
+  - from: templates-agents
+    to: review-checklist-template
+    kind: governs
+  - from: templates-agents
+    to: integration-checklist-template
+    kind: governs
+  - from: templates-agents
+    to: active-slices-template
+    kind: governs
+  - from: templates-agents
+    to: package-scaffold-template
+    kind: governs
+  - from: templates-agents
+    to: change-impact-record-template
+    kind: governs
+
+  - from: skills-agents
+    to: skills-readme
+    kind: governs
+  - from: skills-agents
+    to: repo-instruction-audit-skill
+    kind: governs
+  - from: skills-agents
+    to: top-down-orchestration-skill
+    kind: governs
+  - from: skills-agents
+    to: bottom-up-delivery-skill
+    kind: governs
+  - from: skills-agents
+    to: module-handoff-skill
+    kind: governs
+  - from: skills-agents
+    to: parallel-dispatch-skill
+    kind: governs
+  - from: skills-agents
+    to: integration-gate-skill
+    kind: governs
+  - from: skills-agents
+    to: graph-governed-editing-skill
+    kind: governs
+  - from: skills-agents
+    to: repo-toolchain-operation-skill
+    kind: governs
+
+  - from: ceo-cto-intake-workflow
+    to: cto-prompt
+    kind: routes_to
+  - from: ceo-cto-intake-workflow
+    to: po-pm-prompt
+    kind: routes_to
+  - from: ceo-cto-intake-workflow
+    to: engineering-manager-prompt
+    kind: routes_to
+  - from: top-down-fanout-workflow
+    to: tech-lead-prompt
+    kind: routes_to
+  - from: top-down-fanout-workflow
+    to: module-ownership-template
+    kind: uses
+  - from: top-down-fanout-workflow
+    to: active-slices-template
+    kind: uses
+  - from: review-gate-workflow
+    to: spec-reviewer-prompt
+    kind: routes_to
+  - from: review-gate-workflow
+    to: code-reviewer-prompt
+    kind: routes_to
+  - from: review-gate-workflow
+    to: review-checklist-template
+    kind: uses
+  - from: review-gate-workflow
+    to: worker-handoff-template
+    kind: uses
+  - from: bottom-up-integration-workflow
+    to: integration-worker-prompt
+    kind: routes_to
+  - from: bottom-up-integration-workflow
+    to: integration-checklist-template
+    kind: uses
+  - from: bottom-up-integration-workflow
+    to: worker-handoff-template
+    kind: uses
+  - from: release-readiness-workflow
+    to: qa-prompt
+    kind: routes_to
+  - from: release-readiness-workflow
+    to: devops-prompt
+    kind: routes_to
+  - from: release-readiness-workflow
+    to: release-manager-prompt
+    kind: routes_to
+  - from: release-readiness-workflow
+    to: security-privacy-prompt
+    kind: routes_to
+  - from: release-readiness-workflow
+    to: review-checklist-template
+    kind: uses
+  - from: shared-asset-change-workflow
+    to: change-impact-record-template
+    kind: uses
+  - from: shared-asset-change-workflow
+    to: dependency-graph
+    kind: requires
+  - from: shared-asset-change-workflow
+    to: trace-impact-script
+    kind: requires
+  - from: shared-asset-change-workflow
+    to: graph-governed-editing-skill
+    kind: routes_to
+
+  - from: repo-instruction-audit-skill
+    to: codex-root-agents
+    kind: requires
+  - from: top-down-orchestration-skill
+    to: top-down-fanout-workflow
+    kind: routes_to
+  - from: bottom-up-delivery-skill
+    to: worker-handoff-template
+    kind: routes_to
+  - from: module-handoff-skill
+    to: worker-handoff-template
+    kind: uses
+  - from: parallel-dispatch-skill
+    to: active-slices-template
+    kind: routes_to
+  - from: integration-gate-skill
+    to: review-gate-workflow
+    kind: routes_to
+  - from: integration-gate-skill
+    to: bottom-up-integration-workflow
+    kind: routes_to
+  - from: graph-governed-editing-skill
+    to: dependency-graph
+    kind: requires
+  - from: graph-governed-editing-skill
+    to: shared-asset-change-workflow
+    kind: routes_to
+  - from: graph-governed-editing-skill
+    to: trace-impact-script
+    kind: requires
+
+  - from: memory-agents
+    to: memory-readme
+    kind: governs
+  - from: memory-readme
+    to: codex-root-agents
+    kind: excludes_from_authority

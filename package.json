@@ -3,6 +3,7 @@
   "private": true,
   "packageManager": "pnpm@10.6.5",
   "scripts": {
+    "codex:graph": "node .codex/graph/scripts/trace-impact.mjs",
     "dev": "turbo dev",
     "dev:web": "pnpm --filter @langue/web dev",
     "dev:worker": "pnpm --filter @langue/worker dev",
