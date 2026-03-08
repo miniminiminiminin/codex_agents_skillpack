@@ -1,8 +1,6 @@
 # Instruction Audit
 
-## Purpose
-
-Track how repo instructions are discovered, applied, and checked before work claims are made.
+This file is a project-local audit reminder, not a shared authority document.
 
 ## Audit Order
 
@@ -22,18 +20,7 @@ Track how repo instructions are discovered, applied, and checked before work cla
 
 - identify every instruction source covering the target files
 - note conflicts and apply the deepest valid override
+- when instructions change mid-task, record what changed, what still applies, and whether the update is local or ongoing
 - record any file-scope ownership rule before editing
 - verify claims with fresh commands, not memory
 - report blockers with exact file and minimal required change
-
-## Stop Conditions
-
-- instruction sources are known
-- active file scope is known
-- verification path is known
-
-## Do Not Continue If
-
-- instruction precedence is unclear
-- ownership is ambiguous
-- required verification cannot be named

@@ -5,28 +5,24 @@ description: Use when independent slices in this repo are ready to converge and 
 
 # Integration Gate
 
-## Overview
-
-Integration in this repository is a controlled gate, not an implicit side effect of parallel edits.
-
-The orchestrator accepts only slices that meet contract, review, and verification requirements.
-
 ## When to Use
 
-Use this skill when:
 - multiple worker slices converge on the same workflow
 - public APIs changed and consumers need wiring
 - a branch is close to "done" and needs acceptance
 
-## Gate Checklist
+Use the routing model in `.codex/skills/README.md` first.
+
+## Checklist
 
 1. Confirm ownership boundaries were respected.
 2. Confirm each slice exposes or consumes only public entrypoints.
 3. Confirm required tests ran and the outputs were provided.
-4. Run a spec-conformance review.
-5. Run a code-quality review.
-6. Integrate the smallest coherent batch.
-7. Re-run cross-slice verification after composition.
+4. Use `graph-governed-editing` if merge order, shared ownership, or dependency direction is unclear.
+5. Run a spec-conformance review.
+6. Run a code-quality review.
+7. Integrate the smallest coherent batch.
+8. Re-run cross-slice verification after composition.
 
 ## Accept / Reject Rules
 

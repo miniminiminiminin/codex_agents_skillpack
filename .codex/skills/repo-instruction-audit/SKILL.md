@@ -5,32 +5,27 @@ description: Use when work in this repo touches multiple scopes and you need to 
 
 # Repo Instruction Audit
 
-## Overview
-
-This repository relies on layered instructions. Missing one usually causes scope drift or boundary leakage.
-
-Audit instructions before edits, and re-audit when the work crosses into a new subtree.
-
 ## When to Use
 
-Use this skill when:
 - a task spans apps, packages, or `.codex`
 - ownership is narrow and accidental edits are costly
 - you are reviewing a worker task for compliance
 
-## Audit Process
+Use the routing model in `.codex/skills/README.md` first.
+
+## Checklist
 
 1. Find every `AGENTS.md` that governs the target files.
 2. Read only the scopes that apply.
-3. Extract the actionable rules:
+3. Extract the active rules:
    - ownership limits
    - public API rules
-   - testing expectations
-   - documentation or review requirements
-4. Map those rules to the planned edits before touching files.
-5. Re-check if the task expands into a deeper directory.
+   - testing and review expectations
+4. If ownership or downstream impact is unclear, use `graph-governed-editing`.
+5. Map the rules to the planned edit before touching files.
+6. Re-audit if the work moves into a deeper subtree.
 
-## What to Verify in This Repo
+## Repo Checks
 
 - module replaceability
 - public-entrypoint-only imports

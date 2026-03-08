@@ -1,18 +1,26 @@
 # Skills
 
-This directory holds repo-local operating skills for Codex OS.
+Repo-local operating skills live here.
 
-Use this directory for reusable skills such as:
+## Entry Order
 
-- top-down orchestration
-- bottom-up module delivery
-- integration gating
-- parallel module dispatch
-- worker handoff
-- instruction audits
+1. `graph-governed-editing` is the first-entry skill for shared `.codex` edits and dependency-sensitive seams.
+2. `repo-instruction-audit` confirms scope, ownership, and governing instructions.
+3. Use the task skill after the seam and sync set are clear.
 
-Rules:
+## Directory Rules
 
-- one operating concern per skill
-- repo-local guidance over generic advice
-- align with the repository's contract-first modular architecture
+- Keep one operating concern per skill.
+- Keep skills concise, imperative, and reusable after `.codex` is copied.
+- Put reusable tool procedure in skills, not prompts or workflows.
+- Put sequencing and gates in workflows.
+- Put role behavior in prompts.
+- Do not store required behavior only in `.codex/memory/`.
+
+## Routing Model
+
+1. Read the scoped `AGENTS.md`.
+2. If the edit touches shared `.codex` assets or a dependency-sensitive seam, start with `graph-governed-editing`.
+3. If no graph exists, use the relevant `.codex/workflows/**`, `.codex/prompts/**`, and `.codex/templates/**`.
+4. Run the skill-specific checklist.
+5. Promote repeated lessons into shared assets.

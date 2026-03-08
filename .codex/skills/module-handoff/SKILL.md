@@ -5,22 +5,19 @@ description: Use when a worker in this repo must return a completed slice to the
 
 # Module Handoff
 
-## Overview
-
-A handoff is the boundary between bottom-up delivery and top-down integration.
-
-The goal is to make the next step obvious without bloating context.
-
 ## When to Use
 
-Use this skill when:
 - a worker finished an owned slice
 - another worker or the orchestrator will integrate it
 - review or follow-on work depends on the delivered seam
 
-## Handoff Format
+Use the routing model in `.codex/skills/README.md` first.
 
-Always include:
+## Checklist
+
+1. Name the receiving role, merge point, and verification owner.
+2. If the receiver or downstream dependency is unclear, use `graph-governed-editing`.
+3. Include:
 - what changed
 - exact file list
 - assumptions
@@ -28,17 +25,11 @@ Always include:
 - unresolved risks or edge cases
 - whether a commit was made and its SHA if applicable
 
-If the slice defines a contract, also include:
+4. If the slice defines a contract, also include:
 - input shape
 - output shape
 - failure mode
 - known extension points
-
-## Repo-Specific Expectations
-
-- Describe the public entrypoint, not internal implementation trivia.
-- Call out any boundary pressure or awkward dependency introduced.
-- Mention if another worker owns adjacent files that were intentionally left untouched.
 
 ## Common Mistakes
 
