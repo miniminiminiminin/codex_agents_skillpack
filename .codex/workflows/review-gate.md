@@ -1,39 +1,39 @@
 # Review Gate
 
-## Purpose
+## Decision
 
-Hold a slice at the boundary between implementation and acceptance.
+- gate: can the slice move from implementation to accepted output
+- decision owner: assigned approver
 
-## Inputs
+## Required Evidence
 
 - changed files
 - verification evidence
-- module ownership note
-- spec and code review requests
+- ownership record
+- impact scope
+- upstream dependencies
+- downstream dependencies
+- approval requirements
+- graph sync status
 
-## Outputs
+## Loop
 
-- approved
-- approved with follow-up
-- rejected with blocking findings
+1. Run spec review.
+2. Run code-quality review.
+3. Check that reviewed scope, dependency claims, and verification evidence match the delivered diff.
+4. Confirm required approvers, rollback owner, and graph sync obligations.
+5. Decide `approve`, `approve with follow-up`, `reject`, or `escalate to release gate`.
 
-## Checklist
+## Close When
 
-- run spec review first
-- run code-quality review second
-- confirm verification commands were actually executed
-- confirm no unrelated files were changed
-- confirm public seams remain replaceable
-- capture findings by severity and file
-
-## Stop Conditions
-
-- no blocking spec issues remain
-- no blocking code-quality issues remain
+- no blocking findings remain
 - verification evidence is current
+- approval routing is explicit
+- graph sync obligations are explicit
 
-## Do Not Continue If
+## Hold When
 
-- review skipped the intended scope
+- review scope is incomplete
 - claims were made without fresh verification
-- ownership or boundary violations are unresolved
+- ownership or boundary violations remain
+- required approval or rollback routing is unresolved

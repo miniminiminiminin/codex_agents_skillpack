@@ -1,48 +1,36 @@
 # Bottom-Up Integration
 
-## Purpose
+## Decision
 
-Integrate completed worker slices at stable seams without re-opening settled module boundaries.
+- gate: can the completed slice be integrated at its planned seam
+- decision owner: `CTO`
 
-## Inputs
+## Required Evidence
 
-- worker handoff notes
-- verified slice commits or diffs
-- module ownership record
+- handoff record
+- verified slice diff
+- ownership record
 - integration checklist
+- current graph sync status
 
-## Outputs
+## Loop
 
-- integrated slice status
-- accepted or rejected handoff decision
-- follow-up integration tasks
+1. Confirm the slice stayed inside owned files and passed its slice verification.
+2. Check impact scope plus upstream and downstream dependency claims against the current graph view.
+3. Integrate from lowest-level seam upward.
+4. Run cross-slice verification at the merge point.
+5. Decide `accept seam`, `hold for correction`, or `reject handoff`.
 
-## Checklist
+## Close When
 
-- verify the worker stayed inside owned files
-- verify the slice passes its own tests before integration
-- merge contract layers before app shells
-- integrate one seam at a time
-- run cross-slice verification after each merge point
-- record any boundary correction before moving on
+- the seam composes through a public boundary
+- integration verification is current
+- graph sync state is explicit
+- rollback ownership is explicit when the seam can ship
 
-## Order
-
-1. contracts
-2. schemas
-3. runtimes or adapters
-4. registries
-5. worker or app shells
-6. final integration verification
-
-## Stop Conditions
-
-- the slice composes through a public seam
-- integration verification passes
-- no adjacent module needs hidden knowledge of the slice
-
-## Do Not Continue If
+## Hold When
 
 - the handoff widened scope
 - the slice depends on internal imports
-- integration requires redesign outside the approved seam
+- approval or rollback routing is unresolved
+- integration requires redesign outside the seam

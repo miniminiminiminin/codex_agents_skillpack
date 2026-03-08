@@ -1,52 +1,55 @@
-# Worker Handoff
+# Role Handoff
 
 ## Slice
 
 - name:
+- sender role:
+- receiver role:
 - owner:
 - commit:
 - parent plan:
+- impact scope:
+- upstream dependencies:
+- downstream dependencies:
 
-## Changed Files
+## Files
 
-- 
+- changed files:
+- adjacent files untouched:
 
-## Public Seam
+## Seam
 
 - entrypoint:
 - contract touched:
+- input shape:
+- output shape:
+- failure mode:
+- extension points:
+- graph source:
+- graph sync status:
 
-## What Was Done
+## Delivery
 
-- 
-
-## Assumptions
-
-- 
+- work completed:
+- assumptions:
+- expected merge point:
+- required follow-up:
+- downstream coordination:
 
 ## Verification
 
 - command:
 - exact output:
 - result:
+- verification owner:
+- approvals completed:
+- security/privacy review:
+- release approval:
+- rollback owner:
 
-## Risks
+## Close
 
-- 
-
-## Integration Notes
-
-- expected merge point:
-- required follow-up:
-- adjacent files intentionally untouched:
-
-## Contract Notes
-
-- input shape:
-- output shape:
-- failure mode:
-- extension points:
-
-## Stop Condition Reached
-
-- yes or no:
+- risks:
+- rollback trigger:
+- reusable rule:
+- stop condition reached:

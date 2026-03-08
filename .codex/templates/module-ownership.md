@@ -5,31 +5,45 @@
 - name:
 - purpose:
 - parent plan:
+- impact scope:
+- upstream dependencies:
+- downstream dependencies:
 
-## Owner
+## Roles
 
+- owner role:
 - primary agent:
+- receiver:
+- decision owner:
+- verification owner:
 - spec reviewer:
 - code-quality reviewer:
+- security/privacy reviewer:
+- release approver:
+- rollback owner:
 
 ## Boundaries
 
 - owned files:
 - forbidden files:
-- public seams touched:
+- public seams:
+- graph source:
+- graph sync rule:
 
 ## Verification
 
 - local test command:
 - typecheck command:
 - integration command:
+- approval evidence:
+- security/privacy status:
+- graph sync status:
 
-## Stop Condition
+## Close
 
-- what must be true before handoff:
-
-## Notes
-
+- stop condition:
 - contract assumptions:
 - replacement seam:
 - active-slice dependencies:
+- release impact:
+- reusable rule:

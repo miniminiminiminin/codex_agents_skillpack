@@ -1,25 +1,32 @@
 # Integration Checklist
 
-## Before Merge
+## Seam
 
-- ownership was explicit
-- worker stayed inside assigned files
-- imports use public entrypoints only
-- slice tests passed
+- graph source consulted:
+- ownership explicit:
+- impact scope matches diff:
+- upstream dependencies satisfied:
+- downstream consumers identified:
+- public entrypoints only:
+- slice verification passed:
+- approvals recorded:
+- security/privacy review complete:
+- rollback owner named:
+- release escalation path known:
 
-## During Merge
+## Merge
 
-- integrate lowest-level seam first
-- run cross-slice verification after each merge
-- do not rewrite adjacent modules during merge
+- lowest-level seam first:
+- cross-slice verification run:
+- adjacent modules untouched:
+- graph sync changed during merge:
 
-## After Merge
+## Close
 
-- spec review completed
-- code review completed
-- final verification completed
-- remaining risks recorded
-
-## Stop Condition
-
-- the integrated seam is replaceable and verified
+- spec review complete:
+- code review complete:
+- final verification complete:
+- graph sync complete:
+- release approval recorded:
+- remaining risks:
+- reusable guardrail captured:

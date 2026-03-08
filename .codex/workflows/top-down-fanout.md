@@ -1,43 +1,37 @@
 # Top-Down Fan-Out
 
-## Purpose
+## Decision
 
-Turn one approved design into isolated worker slices with explicit ownership.
+- gate: is the approved plan ready to split into role-owned slices
+- decision owner: `CTO`
 
-## Inputs
+## Required Evidence
 
-- approved design doc
+- intake outcome
+- approved design
 - approved implementation plan
-- current repo constraints from `AGENTS.md`
-- list of candidate modules or seams
+- current repo constraints
+- current graph view
+- candidate modules or seams
 
-## Outputs
+## Loop
 
-- worker slice list
-- ownership assignments
-- per-slice file boundaries
-- per-slice verification command
-- integration order
+1. Confirm design and plan are approved.
+2. Consult current graph artifacts before assigning slices.
+3. Define one slice per module or seam with disjoint file ownership.
+4. Record per-slice impact scope, upstream dependencies, downstream dependencies, verification owner, and approval path.
+5. Decide `dispatch`, `hold for contract work`, or `hold for graph clarification`.
 
-## Checklist
+## Close When
 
-- confirm design and plan are approved
-- split work by module boundary, not by convenience
-- assign disjoint file ownership for each worker
-- define one acceptance test or verification command per slice
-- mark shared files as orchestrator-owned unless explicitly delegated
-- record merge order from lowest-level contracts upward
+- every active slice has one owner
+- every slice has one verification command
+- integration order is explicit
+- shared files remain `CTO`-owned unless explicitly delegated
 
-## Stop Conditions
+## Hold When
 
-- every active slice has a single owner
-- every slice has a bounded file set
-- every slice has a verification command
-- no worker needs to edit another worker's files
-
-## Do Not Continue If
-
-- the design is still moving
 - ownership overlaps remain
 - a slice depends on an undefined contract
+- graph state is missing for the split
 - integration order is unclear
