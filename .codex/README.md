@@ -11,6 +11,10 @@ This layer exists to make role-based multi-agent execution repeatable and visibl
 
 - `AGENTS.md`
   subtree operating rules
+- `config.toml`
+  shared Codex runtime feature flags and agent-role registration
+- `agents/`
+  role-specific config layers for spawned sub-agents
 - `skills/`
   reusable operating skills
 - `prompts/`

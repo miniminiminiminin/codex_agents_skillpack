@@ -26,6 +26,86 @@ nodes:
       - codex-root-agents
       - graph-readme
 
+  - id: codex-runtime-config
+    type: config
+    path: .codex/config.toml
+    authority_level: 88
+    local_only: false
+    owns:
+      - multi-agent-runtime-config
+      - agent-role-registration
+    depends_on:
+      - codex-root-agents
+      - dependency-graph
+
+  - id: agents-config-agents
+    type: agents
+    path: .codex/agents/AGENTS.md
+    authority_level: 82
+    local_only: false
+    owns:
+      - agent-config-directory-rules
+    depends_on:
+      - codex-root-agents
+      - codex-runtime-config
+      - dependency-graph
+
+  - id: explorer-agent-config
+    type: config
+    path: .codex/agents/explorer.toml
+    authority_level: 72
+    local_only: false
+    owns:
+      - explorer-agent-runtime
+    depends_on:
+      - agents-config-agents
+      - codex-runtime-config
+
+  - id: worker-agent-config
+    type: config
+    path: .codex/agents/worker.toml
+    authority_level: 72
+    local_only: false
+    owns:
+      - worker-agent-runtime
+    depends_on:
+      - agents-config-agents
+      - codex-runtime-config
+
+  - id: monitor-agent-config
+    type: config
+    path: .codex/agents/monitor.toml
+    authority_level: 70
+    local_only: false
+    owns:
+      - monitor-agent-runtime
+    depends_on:
+      - agents-config-agents
+      - codex-runtime-config
+
+  - id: reviewer-agent-config
+    type: config
+    path: .codex/agents/reviewer.toml
+    authority_level: 74
+    local_only: false
+    owns:
+      - reviewer-agent-runtime
+    depends_on:
+      - agents-config-agents
+      - codex-runtime-config
+
+  - id: graph-editor-agent-config
+    type: config
+    path: .codex/agents/graph-editor.toml
+    authority_level: 78
+    local_only: false
+    owns:
+      - graph-editor-agent-runtime
+    depends_on:
+      - agents-config-agents
+      - codex-runtime-config
+      - trace-impact-script
+
   - id: graph-agents
     type: agents
     path: .codex/graph/AGENTS.md
@@ -699,7 +779,13 @@ edges:
     to: codex-root-readme
     kind: governs
   - from: codex-root-agents
+    to: codex-runtime-config
+    kind: governs
+  - from: codex-root-agents
     to: graph-agents
+    kind: governs
+  - from: codex-root-agents
+    to: agents-config-agents
     kind: governs
   - from: graph-agents
     to: graph-scripts-agents
@@ -804,6 +890,22 @@ edges:
     kind: governs
   - from: prompts-agents
     to: worker-bridge-prompt
+    kind: governs
+
+  - from: agents-config-agents
+    to: explorer-agent-config
+    kind: governs
+  - from: agents-config-agents
+    to: worker-agent-config
+    kind: governs
+  - from: agents-config-agents
+    to: monitor-agent-config
+    kind: governs
+  - from: agents-config-agents
+    to: reviewer-agent-config
+    kind: governs
+  - from: agents-config-agents
+    to: graph-editor-agent-config
     kind: governs
 
   - from: workflows-agents

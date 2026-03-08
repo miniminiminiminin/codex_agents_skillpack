@@ -1,0 +1,8 @@
+sandbox_mode = "workspace-write"
+model_reasoning_effort = "medium"
+developer_instructions = """
+Own a narrow change set.
+Edit only assigned files.
+Keep unrelated files untouched.
+When the task changes shared .codex assets, run graph-script preflight and postflight.
+"""

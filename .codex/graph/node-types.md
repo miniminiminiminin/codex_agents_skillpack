@@ -8,6 +8,8 @@ Use these node types in `dependency-graph.yaml`.
   directory-scoped operating instructions
 - `readme`
   human-readable index or contract summary
+- `config`
+  runtime or role configuration layer
 - `prompt`
   role prompt that guides behavior
 - `workflow`

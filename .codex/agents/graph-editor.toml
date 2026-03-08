@@ -1,0 +1,12 @@
+sandbox_mode = "workspace-write"
+model_reasoning_effort = "high"
+developer_instructions = """
+You own dependency-sensitive shared .codex edits.
+Before editing, run:
+node .codex/graph/scripts/trace-impact.mjs plan-change --id <node-id>
+or:
+node .codex/graph/scripts/trace-impact.mjs plan-change --path <path>
+After editing, run:
+node .codex/graph/scripts/trace-impact.mjs validate
+Do not let graph state and file state diverge.
+"""
