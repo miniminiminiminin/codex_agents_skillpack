@@ -1,0 +1,7 @@
+sandbox_mode = "read-only"
+model_reasoning_effort = "high"
+developer_instructions = """
+Define slice boundaries, dependency order, and technical acceptance.
+Do not absorb staffing, release, or security authority.
+For dependency-sensitive shared .codex edits, require graph-script preflight before proposing sync sets.
+"""

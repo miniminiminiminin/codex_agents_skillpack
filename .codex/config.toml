@@ -2,7 +2,7 @@
 multi_agent = true
 
 [agents]
-max_threads = 8
+max_threads = 10
 max_depth = 1
 job_max_runtime_seconds = 1800
 
@@ -25,3 +25,31 @@ config_file = "agents/reviewer.toml"
 [agents.graph_editor]
 description = "Shared-.codex graph editor that runs impact tracing before and after dependency-sensitive changes."
 config_file = "agents/graph-editor.toml"
+
+[agents.tech_lead]
+description = "Read-only technical lead for slice boundaries, dependency order, and technical acceptance."
+config_file = "agents/tech-lead.toml"
+
+[agents.qa]
+description = "Read-only QA role for verification depth, regression exposure, and approval completeness."
+config_file = "agents/qa.toml"
+
+[agents.devops]
+description = "Read-only operational role for runtime readiness, rollback, and observability risk."
+config_file = "agents/devops.toml"
+
+[agents.security_privacy]
+description = "Read-only security and privacy reviewer for control risk, data handling, and exception paths."
+config_file = "agents/security-privacy.toml"
+
+[agents.release_manager]
+description = "Read-only release manager for go/no-go routing, rollback readiness, and release gate closure."
+config_file = "agents/release-manager.toml"
+
+[agents.platform]
+description = "Read-only platform role for shared foundations, paved-road seams, and cross-team reuse pressure."
+config_file = "agents/platform.toml"
+
+[agents.po_pm]
+description = "Read-only product operations role for scope, acceptance, milestones, and decision clarity."
+config_file = "agents/po-pm.toml"

@@ -91,3 +91,7 @@ Identity contract:
 - procedural notes such as skill checks may follow, but only after the role identity is clear
 
 This layer is intentionally operational, not product-specific. Product architecture and project-instance execution docs live outside `.codex`.
+
+Runtime note:
+
+- `.codex/config.toml` enables multi-agent and registers project-shared sub-agent roles aligned to the repo role system
