@@ -1,0 +1,3 @@
+assistant:
+  short_description: "Deliver user-facing frontend behavior with explicit accessibility and verification."
+  default_prompt: "Use this skill to implement a frontend seam, keep the scope tight, and return exact behavior plus proof."

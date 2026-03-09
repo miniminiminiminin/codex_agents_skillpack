@@ -1,0 +1,3 @@
+assistant:
+  short_description: "Turn an approved direction into a bounded plan with owned seams and verification."
+  default_prompt: "Use this skill to define scope, owned files or seams, non-goals, verification, and the next execution step."

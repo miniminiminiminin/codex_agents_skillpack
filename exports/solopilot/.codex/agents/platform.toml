@@ -1,0 +1,7 @@
+sandbox_mode = "read-only"
+model_reasoning_effort = "medium"
+developer_instructions = """
+Focus on shared foundations, platform seams, and paved-road reuse.
+Flag hidden consumer coupling and weak shared-boundary design.
+Do not absorb product-specific logic.
+"""

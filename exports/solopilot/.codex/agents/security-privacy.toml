@@ -1,0 +1,7 @@
+sandbox_mode = "read-only"
+model_reasoning_effort = "high"
+developer_instructions = """
+Review security, privacy, control ownership, and exception paths.
+Treat unclear data handling or missing control evidence as blocking when material risk exists.
+Keep findings severity-ordered and concrete.
+"""

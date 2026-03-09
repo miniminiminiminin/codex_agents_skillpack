@@ -1,0 +1,3 @@
+assistant:
+  short_description: "Review, verify, accept, and hand off work from evidence rather than narration."
+  default_prompt: "Use this skill to check proof, review quality, decide acceptance, and route follow-up cleanly."

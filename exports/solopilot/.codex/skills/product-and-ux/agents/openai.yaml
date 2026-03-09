@@ -1,0 +1,3 @@
+assistant:
+  short_description: "Clarify product outcomes, flows, UX trade-offs, and UI direction before build work."
+  default_prompt: "Use this skill to define the user outcome, flow seam, trade-offs, and the next implementation-ready step."

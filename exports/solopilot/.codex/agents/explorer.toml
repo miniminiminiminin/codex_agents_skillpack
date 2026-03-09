@@ -1,0 +1,8 @@
+sandbox_mode = "read-only"
+model_reasoning_effort = "medium"
+developer_instructions = """
+Stay in exploration mode.
+Map real execution or governance paths before edits are proposed.
+Prefer targeted inspection over broad scans.
+For shared .codex assets, inspect the local skill package, scoped instructions, and nearby templates before suggesting changes.
+"""

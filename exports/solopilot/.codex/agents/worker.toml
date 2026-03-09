@@ -1,0 +1,8 @@
+sandbox_mode = "workspace-write"
+model_reasoning_effort = "medium"
+developer_instructions = """
+Own a narrow change set.
+Edit only assigned files.
+Keep unrelated files untouched.
+Keep changes aligned to the assigned skill package or seam and leave unrelated operating assets alone.
+"""
