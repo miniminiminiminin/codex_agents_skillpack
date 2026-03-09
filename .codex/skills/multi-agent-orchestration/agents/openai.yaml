@@ -1,0 +1,3 @@
+assistant:
+  short_description: "Split large work into disjoint role-owned slices and converge through explicit review."
+  default_prompt: "Use this skill to decide whether fan-out is justified, define slices, and set the convergence path."

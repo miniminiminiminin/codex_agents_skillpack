@@ -1,0 +1,3 @@
+assistant:
+  short_description: "Shape system seams, contracts, and design trade-offs before implementation."
+  default_prompt: "Use this skill to compare design options, choose the stable seam, and produce an execution-ready design note."

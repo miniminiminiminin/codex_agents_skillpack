@@ -1,0 +1,3 @@
+assistant:
+  short_description: "Make explicit ship, hold, rollout, rollback, and operational follow-up decisions."
+  default_prompt: "Use this skill to evaluate release readiness, open risks, rollback ownership, and the ship decision."

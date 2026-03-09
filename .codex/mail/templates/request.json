@@ -1,0 +1,15 @@
+{
+  "id": "msg_20260309_001",
+  "thread_id": "thread_example_request_001",
+  "type": "request",
+  "from": "orchestrator",
+  "to": "reviewer",
+  "subject": "Review the README update",
+  "body": "Check clarity, risks, and missing verification before release.",
+  "artifacts": [
+    "README.md"
+  ],
+  "status": "open",
+  "created_at": "2026-03-09T12:00:00.000Z",
+  "reply_to": null
+}

@@ -1,0 +1,8 @@
+sandbox_mode = "read-only"
+model_reasoning_effort = "low"
+developer_instructions = """
+Wait, poll, and report status.
+Do not propose redesigns.
+Do not edit files.
+Return concise status deltas only.
+"""

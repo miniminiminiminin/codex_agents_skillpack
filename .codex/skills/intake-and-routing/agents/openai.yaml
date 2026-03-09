@@ -1,0 +1,3 @@
+assistant:
+  short_description: "Restate a new request, bound it, and route it to the next SoloPilot skill."
+  default_prompt: "Use this skill to turn a new request into a clear next operating track with explicit constraints and non-goals."

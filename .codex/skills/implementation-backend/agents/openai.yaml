@@ -1,0 +1,3 @@
+assistant:
+  short_description: "Deliver backend contracts, jobs, services, and adapters without widening scope."
+  default_prompt: "Use this skill to implement a backend seam, preserve dependency boundaries, and return exact contract evidence."

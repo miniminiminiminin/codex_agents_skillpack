@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SoloPilot Agent Mail Message",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "thread_id",
+    "type",
+    "from",
+    "to",
+    "subject",
+    "body",
+    "artifacts",
+    "status",
+    "created_at",
+    "reply_to"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "thread_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "type": {
+      "type": "string",
+      "enum": ["request", "response"]
+    },
+    "from": {
+      "type": "string",
+      "minLength": 1
+    },
+    "to": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subject": {
+      "type": "string",
+      "minLength": 1
+    },
+    "body": {
+      "type": "string",
+      "minLength": 1
+    },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "status": {
+      "type": "string",
+      "enum": ["open", "completed", "blocked"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "reply_to": {
+      "type": ["string", "null"]
+    }
+  }
+}

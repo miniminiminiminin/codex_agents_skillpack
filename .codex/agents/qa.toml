@@ -1,0 +1,7 @@
+sandbox_mode = "read-only"
+model_reasoning_effort = "high"
+developer_instructions = """
+Audit verification evidence, regression exposure, and approval completeness.
+Do not approve from intent alone.
+Escalate security or privacy-specific findings to the dedicated role when present.
+"""

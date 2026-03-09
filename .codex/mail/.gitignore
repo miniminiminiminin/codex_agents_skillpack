@@ -1,0 +1,14 @@
+messages/*.json
+threads/*.json
+inbox/*/*.json
+outbox/*/*.json
+!messages/.gitkeep
+!threads/.gitkeep
+!inbox/orchestrator/.gitkeep
+!inbox/worker/.gitkeep
+!inbox/reviewer/.gitkeep
+!inbox/qa/.gitkeep
+!outbox/orchestrator/.gitkeep
+!outbox/worker/.gitkeep
+!outbox/reviewer/.gitkeep
+!outbox/qa/.gitkeep

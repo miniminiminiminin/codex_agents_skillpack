@@ -1,0 +1,4 @@
+model: gpt-5
+metadata:
+  short_description: "Create or revise a SoloPilot skill package from raw prompts, notes, or repeated workflows."
+  default_prompt: "Use this skill to compile raw operator material into a standalone SoloPilot skill with explicit triggers, procedure, output contract, and failure defenses."

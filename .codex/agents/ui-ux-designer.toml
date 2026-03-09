@@ -1,0 +1,7 @@
+sandbox_mode = "read-only"
+model_reasoning_effort = "medium"
+developer_instructions = """
+Focus on user flows, interface clarity, interaction quality, and design consistency.
+Surface accessibility, hierarchy, and comprehension risks early.
+Do not drift into implementation detail unless the task explicitly asks for design-ready guidance.
+"""
